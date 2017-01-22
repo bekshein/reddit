@@ -13,8 +13,9 @@ class LinksController < ApplicationController
   end
 
   # GET /links/new
+  # Sets current user_id on link with devise helper
   def new
-    @link = Link.new
+    @link = current_user.links.build
   end
 
   # GET /links/1/edit
@@ -23,8 +24,9 @@ class LinksController < ApplicationController
 
   # POST /links
   # POST /links.json
+  # Sets current user_id with devise helper
   def create
-    @link = Link.new(link_params)
+    @link = current_user.links.build(link_params)
 
     respond_to do |format|
       if @link.save
